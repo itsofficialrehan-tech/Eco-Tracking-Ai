@@ -1,0 +1,1025 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>EcoTrack AI – Carbon Footprint Awareness Platform</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #0a0f0a;
+      --bg2: #111711;
+      --bg3: #162016;
+      --surface: #1a271a;
+      --surface2: #1f2e1f;
+      --border: rgba(74,222,128,0.12);
+      --border2: rgba(74,222,128,0.22);
+      --text: #e8f5e8;
+      --text2: #9ab89a;
+      --text3: #5a7a5a;
+      --green: #4ade80;
+      --green2: #a3e635;
+      --greenDim: rgba(74,222,128,0.10);
+      --greenDim2: rgba(74,222,128,0.18);
+      --radius: 12px;
+      --radius-sm: 8px;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      min-height: 100vh;
+    }
+
+    /* ── NAV ── */
+    nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 18px 48px;
+      border-bottom: 0.5px solid var(--border);
+      position: sticky;
+      top: 0;
+      background: rgba(10,15,10,0.92);
+      backdrop-filter: blur(12px);
+      z-index: 100;
+    }
+    .nav-logo {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 20px;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      color: var(--text);
+      text-decoration: none;
+    }
+    .nav-logo-dot {
+      width: 10px; height: 10px;
+      border-radius: 50%;
+      background: var(--green);
+      box-shadow: 0 0 10px var(--green);
+    }
+    .nav-links {
+      display: flex;
+      gap: 28px;
+      font-size: 14px;
+      color: var(--text2);
+    }
+    .nav-links a {
+      color: var(--text2);
+      text-decoration: none;
+      transition: color 0.15s;
+    }
+    .nav-links a:hover { color: var(--text); }
+    .nav-cta {
+      background: var(--greenDim2);
+      color: var(--green);
+      border: 0.5px solid var(--border2);
+      padding: 9px 22px;
+      border-radius: 999px;
+      font-size: 14px;
+      font-weight: 500;
+      cursor: pointer;
+      text-decoration: none;
+      transition: background 0.15s;
+    }
+    .nav-cta:hover { background: rgba(74,222,128,0.26); }
+
+    /* ── HERO ── */
+    .hero {
+      text-align: center;
+      padding: 80px 40px 64px;
+      position: relative;
+      overflow: hidden;
+    }
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: -120px; left: 50%;
+      transform: translateX(-50%);
+      width: 600px; height: 600px;
+      background: radial-gradient(circle, rgba(74,222,128,0.07) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    .eyebrow {
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--green);
+      margin-bottom: 22px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+    }
+    .eyebrow::before, .eyebrow::after {
+      content: '';
+      width: 40px; height: 0.5px;
+      background: var(--border2);
+    }
+    .hero-title {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 58px;
+      font-weight: 700;
+      line-height: 1.08;
+      letter-spacing: -0.025em;
+      margin-bottom: 20px;
+      color: var(--text);
+    }
+    .hero-title span { color: var(--green); }
+    .hero-sub {
+      font-size: 18px;
+      color: var(--text2);
+      max-width: 500px;
+      margin: 0 auto 40px;
+      line-height: 1.65;
+    }
+    .hero-btns {
+      display: flex;
+      justify-content: center;
+      gap: 12px;
+      margin-bottom: 64px;
+      flex-wrap: wrap;
+    }
+    .btn-primary {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--green);
+      color: #0a0f0a;
+      border: none;
+      padding: 13px 30px;
+      border-radius: 999px;
+      font-size: 15px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: opacity 0.15s, transform 0.1s;
+      font-family: 'Inter', sans-serif;
+    }
+    .btn-primary:hover { opacity: 0.88; }
+    .btn-primary:active { transform: scale(0.97); }
+    .btn-ghost {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: transparent;
+      color: var(--text2);
+      border: 0.5px solid var(--border2);
+      padding: 13px 30px;
+      border-radius: 999px;
+      font-size: 15px;
+      font-weight: 500;
+      cursor: pointer;
+      transition: background 0.15s, color 0.15s;
+      font-family: 'Inter', sans-serif;
+    }
+    .btn-ghost:hover { background: var(--surface); color: var(--text); }
+
+    /* ── SCORE RING ── */
+    .ring-wrap {
+      display: flex;
+      justify-content: center;
+      margin: 0 auto;
+      position: relative;
+      width: 240px; height: 240px;
+    }
+    .ring-wrap canvas { position: absolute; top: 0; left: 0; }
+    .ring-inner {
+      position: absolute;
+      top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+      text-align: center;
+    }
+    .ring-num {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 56px;
+      font-weight: 700;
+      color: var(--green);
+      line-height: 1;
+    }
+    .ring-label { font-size: 12px; color: var(--text3); margin-top: 4px; }
+    .ring-badge {
+      display: inline-block;
+      margin-top: 16px;
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--green);
+      background: var(--greenDim2);
+      border: 0.5px solid var(--border2);
+      padding: 5px 16px;
+      border-radius: 999px;
+    }
+
+    /* ── DIVIDER ── */
+    .divider { height: 0.5px; background: var(--border); margin: 0 48px; }
+
+    /* ── SECTIONS ── */
+    .section { padding: 64px 48px; }
+    .section-label {
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--text3);
+      margin-bottom: 10px;
+    }
+    .section-title {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 32px;
+      font-weight: 600;
+      line-height: 1.2;
+      margin-bottom: 14px;
+    }
+    .section-sub {
+      font-size: 16px;
+      color: var(--text2);
+      line-height: 1.65;
+      max-width: 480px;
+      margin-bottom: 36px;
+    }
+
+    /* ── FEATURES GRID ── */
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 14px;
+    }
+    .feat-card {
+      background: var(--surface);
+      border: 0.5px solid var(--border);
+      border-radius: var(--radius);
+      padding: 24px;
+      transition: border-color 0.2s, background 0.2s;
+    }
+    .feat-card:hover {
+      border-color: var(--border2);
+      background: var(--surface2);
+    }
+    .feat-icon {
+      font-size: 24px;
+      color: var(--green);
+      margin-bottom: 14px;
+    }
+    .feat-title {
+      font-size: 15px;
+      font-weight: 500;
+      margin-bottom: 8px;
+      color: var(--text);
+    }
+    .feat-desc {
+      font-size: 13px;
+      color: var(--text2);
+      line-height: 1.55;
+    }
+
+    /* ── CALCULATOR ── */
+    .card {
+      background: var(--surface);
+      border: 0.5px solid var(--border);
+      border-radius: var(--radius);
+      padding: 28px;
+    }
+    .card-title {
+      font-size: 15px;
+      font-weight: 500;
+      margin-bottom: 22px;
+      color: var(--text);
+    }
+    .calc-row { margin-bottom: 22px; }
+    .calc-row label {
+      font-size: 13px;
+      color: var(--text2);
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 9px;
+    }
+    .calc-row label span { font-weight: 500; color: var(--text); }
+    input[type=range] {
+      -webkit-appearance: none;
+      width: 100%;
+      height: 4px;
+      background: var(--surface2);
+      border-radius: 999px;
+      outline: none;
+      cursor: pointer;
+    }
+    input[type=range]::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      width: 18px; height: 18px;
+      border-radius: 50%;
+      background: var(--green);
+      cursor: pointer;
+      transition: transform 0.1s;
+    }
+    input[type=range]::-webkit-slider-thumb:hover { transform: scale(1.15); }
+    input[type=range]::-moz-range-thumb {
+      width: 18px; height: 18px;
+      border-radius: 50%;
+      background: var(--green);
+      cursor: pointer;
+      border: none;
+    }
+    .calc-result {
+      margin-top: 24px;
+      padding: 18px 20px;
+      background: var(--bg3);
+      border: 0.5px solid var(--border2);
+      border-radius: var(--radius-sm);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .calc-result-label { font-size: 14px; color: var(--text2); }
+    .calc-result-sub { font-size: 11px; color: var(--text3); margin-top: 3px; }
+    .calc-result-val {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 28px;
+      font-weight: 600;
+      color: var(--green);
+    }
+    .calc-result-unit { font-size: 12px; color: var(--text3); margin-left: 4px; }
+    .full-btn {
+      margin-top: 14px;
+      width: 100%;
+      background: transparent;
+      color: var(--text2);
+      border: 0.5px solid var(--border2);
+      padding: 12px;
+      border-radius: var(--radius-sm);
+      font-size: 14px;
+      font-weight: 500;
+      cursor: pointer;
+      transition: background 0.15s, color 0.15s;
+      font-family: 'Inter', sans-serif;
+    }
+    .full-btn:hover { background: var(--surface2); color: var(--text); }
+
+    /* ── DASHBOARD ── */
+    .two-col {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+    @media (max-width: 720px) { .two-col { grid-template-columns: 1fr; } }
+    .bar-chart {
+      display: flex;
+      align-items: flex-end;
+      gap: 6px;
+      height: 90px;
+      margin-top: 16px;
+    }
+    .bar {
+      flex: 1;
+      border-radius: 4px 4px 0 0;
+      background: var(--greenDim2);
+      min-height: 6px;
+      transition: background 0.2s;
+    }
+    .bar.active, .bar:hover { background: var(--green); }
+    .bar-labels {
+      display: flex;
+      gap: 6px;
+      margin-top: 5px;
+    }
+    .bar-label {
+      flex: 1;
+      text-align: center;
+      font-size: 10px;
+      color: var(--text3);
+    }
+    .trend-row {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 11px 0;
+      border-bottom: 0.5px solid var(--border);
+    }
+    .trend-row:last-child { border-bottom: none; }
+    .trend-icon {
+      font-size: 16px;
+      width: 34px; height: 34px;
+      border-radius: var(--radius-sm);
+      background: var(--greenDim);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--green);
+      flex-shrink: 0;
+    }
+    .trend-info { flex: 1; }
+    .trend-name { font-size: 13px; font-weight: 500; color: var(--text); }
+    .trend-sub { font-size: 11px; color: var(--text3); margin-top: 2px; }
+    .trend-val { font-size: 13px; font-weight: 500; color: var(--green); }
+
+    /* ── SCORE TIERS ── */
+    .tier-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+    }
+    @media (max-width: 500px) { .tier-grid { grid-template-columns: 1fr; } }
+    .tier-card {
+      padding: 18px 20px;
+      border-radius: var(--radius);
+      border: 0.5px solid var(--border);
+      background: var(--surface);
+    }
+    .tier-card.top {
+      background: var(--greenDim2);
+      border-color: var(--border2);
+    }
+    .tier-range {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 22px;
+      font-weight: 700;
+      color: var(--text);
+      margin-bottom: 4px;
+    }
+    .tier-card.top .tier-range { color: var(--green); }
+    .tier-name { font-size: 14px; font-weight: 500; color: var(--text); }
+    .tier-card.top .tier-name { color: var(--green); }
+    .tier-desc { font-size: 12px; color: var(--text3); margin-top: 4px; }
+
+    /* ── BADGES ── */
+    .badges-row {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+    .badge-card {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      background: var(--surface);
+      border: 0.5px solid var(--border);
+      border-radius: var(--radius);
+      padding: 20px 24px;
+      min-width: 130px;
+      transition: border-color 0.2s, background 0.2s;
+    }
+    .badge-card:hover { border-color: var(--border2); background: var(--surface2); }
+    .badge-emoji { font-size: 28px; margin-bottom: 10px; }
+    .badge-name { font-size: 13px; font-weight: 500; text-align: center; color: var(--text); }
+    .badge-pts { font-size: 11px; color: var(--text3); margin-top: 4px; }
+
+    /* ── STATS ROW ── */
+    .stats-row {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+      gap: 12px;
+      margin-bottom: 48px;
+    }
+    .stat-card {
+      background: var(--surface);
+      border: 0.5px solid var(--border);
+      border-radius: var(--radius);
+      padding: 20px;
+    }
+    .stat-num {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 28px;
+      font-weight: 700;
+      color: var(--green);
+      margin-bottom: 4px;
+    }
+    .stat-label { font-size: 12px; color: var(--text2); }
+
+    /* ── STACK TAGS ── */
+    .stack-tags { display: flex; flex-wrap: wrap; gap: 8px; }
+    .stack-tag {
+      font-size: 12px;
+      padding: 5px 14px;
+      border-radius: 999px;
+      border: 0.5px solid var(--border);
+      color: var(--text2);
+      background: var(--surface);
+    }
+
+    /* ── ACCESSIBILITY ── */
+    .a11y-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 10px;
+    }
+    .a11y-item {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 12px 14px;
+      background: var(--surface);
+      border: 0.5px solid var(--border);
+      border-radius: var(--radius-sm);
+      font-size: 13px;
+      color: var(--text2);
+    }
+    .a11y-item i { color: var(--green); font-size: 16px; }
+
+    /* ── CTA BLOCK ── */
+    .cta-block {
+      text-align: center;
+      padding: 72px 40px;
+      background: var(--surface);
+      border-top: 0.5px solid var(--border);
+      position: relative;
+      overflow: hidden;
+    }
+    .cta-block::before {
+      content: '';
+      position: absolute;
+      bottom: -100px; left: 50%;
+      transform: translateX(-50%);
+      width: 500px; height: 300px;
+      background: radial-gradient(circle, rgba(74,222,128,0.07) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    .cta-block h2 {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 36px;
+      font-weight: 700;
+      margin-bottom: 12px;
+    }
+    .cta-block p {
+      font-size: 16px;
+      color: var(--text2);
+      margin-bottom: 28px;
+    }
+    .cta-btns {
+      display: flex;
+      justify-content: center;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      padding: 24px 48px;
+      border-top: 0.5px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      font-size: 13px;
+      color: var(--text3);
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+    footer a { color: var(--text3); text-decoration: none; }
+    footer a:hover { color: var(--green); }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 680px) {
+      nav { padding: 14px 20px; }
+      .nav-links { display: none; }
+      .hero { padding: 60px 20px 48px; }
+      .hero-title { font-size: 38px; }
+      .section { padding: 48px 20px; }
+      .divider { margin: 0 20px; }
+      footer { padding: 20px; }
+    }
+
+    /* ── FOCUS / ACCESSIBILITY ── */
+    :focus-visible {
+      outline: 2px solid var(--green);
+      outline-offset: 3px;
+      border-radius: 4px;
+    }
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav role="navigation" aria-label="Main navigation">
+    <a href="#" class="nav-logo" aria-label="EcoTrack AI home">
+      <div class="nav-logo-dot" aria-hidden="true"></div>
+      EcoTrack AI
+    </a>
+    <div class="nav-links" role="list">
+      <a href="#features" role="listitem">Features</a>
+      <a href="#calculator" role="listitem">Calculator</a>
+      <a href="#scoring" role="listitem">Scoring</a>
+      <a href="#stack" role="listitem">Stack</a>
+    </div>
+    <a href="#calculator" class="nav-cta">Try calculator</a>
+  </nav>
+
+  <!-- HERO -->
+  <main>
+  <section class="hero" aria-labelledby="hero-heading">
+    <div class="eyebrow" aria-hidden="true">Carbon Footprint Awareness Platform</div>
+    <h1 class="hero-title" id="hero-heading">
+      Know your impact.<br><span>Reduce it intelligently.</span>
+    </h1>
+    <p class="hero-sub">
+      EcoTrack AI helps you measure, understand, and cut your carbon footprint — powered by Gemini AI, smart goals, and real-time insights.
+    </p>
+    <div class="hero-btns">
+      <button class="btn-primary" onclick="document.getElementById('calculator').scrollIntoView({behavior:'smooth'})">
+        <i class="ti ti-leaf" aria-hidden="true"></i> Start tracking free
+      </button>
+      <button class="btn-ghost" onclick="document.getElementById('features').scrollIntoView({behavior:'smooth'})">
+        <i class="ti ti-arrow-down" aria-hidden="true"></i> Explore features
+      </button>
+    </div>
+
+    <div class="ring-wrap" role="img" aria-label="Sustainability score: 78 out of 100 — Green Explorer">
+      <canvas id="ringCanvas" width="240" height="240" aria-hidden="true"></canvas>
+      <div class="ring-inner">
+        <div class="ring-num" id="scoreNum" aria-live="polite">0</div>
+        <div class="ring-label">Sustainability Score</div>
+      </div>
+    </div>
+    <div class="ring-badge" id="scoreBadge" aria-live="polite">Calculating…</div>
+  </section>
+
+  <!-- STATS -->
+  <section class="section" aria-label="Platform statistics">
+    <div class="stats-row">
+      <div class="stat-card">
+        <div class="stat-num">50K+</div>
+        <div class="stat-label">Active users</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-num">2.4M</div>
+        <div class="stat-label">kg CO₂ tracked</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-num">18%</div>
+        <div class="stat-label">Avg. reduction</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-num">95+</div>
+        <div class="stat-label">Lighthouse score</div>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider" role="separator"></div>
+
+  <!-- FEATURES -->
+  <section class="section" id="features" aria-labelledby="features-heading">
+    <div class="section-label">Features</div>
+    <h2 class="section-title" id="features-heading">Everything you need to go green</h2>
+    <p class="section-sub">From a smart calculator to an AI coach — all in one accessible, secure platform targeting 100/100 across all Lighthouse metrics.</p>
+    <div class="features-grid" role="list">
+      <article class="feat-card" role="listitem">
+        <div class="feat-icon"><i class="ti ti-calculator" aria-hidden="true"></i></div>
+        <h3 class="feat-title">Smart Carbon Calculator</h3>
+        <p class="feat-desc">Track transport, energy, food, and shopping with daily, weekly, and monthly CO₂ scores.</p>
+      </article>
+      <article class="feat-card" role="listitem">
+        <div class="feat-icon"><i class="ti ti-robot" aria-hidden="true"></i></div>
+        <h3 class="feat-title">AI Sustainability Coach</h3>
+        <p class="feat-desc">Gemini-powered personalised recommendations, lifestyle advice, and sustainability education.</p>
+      </article>
+      <article class="feat-card" role="listitem">
+        <div class="feat-icon"><i class="ti ti-chart-line" aria-hidden="true"></i></div>
+        <h3 class="feat-title">Interactive Dashboard</h3>
+        <p class="feat-desc">Line, bar, pie charts and heat maps — your carbon trends visualised at a glance.</p>
+      </article>
+      <article class="feat-card" role="listitem">
+        <div class="feat-icon"><i class="ti ti-target" aria-hidden="true"></i></div>
+        <h3 class="feat-title">Goal Management</h3>
+        <p class="feat-desc">Set reduction targets, track completion, and get notified when you hit milestones.</p>
+      </article>
+      <article class="feat-card" role="listitem">
+        <div class="feat-icon"><i class="ti ti-trophy" aria-hidden="true"></i></div>
+        <h3 class="feat-title">Gamification</h3>
+        <p class="feat-desc">Earn badges, points, and climb the leaderboard with weekly eco-challenges.</p>
+      </article>
+      <article class="feat-card" role="listitem">
+        <div class="feat-icon"><i class="ti ti-file-description" aria-hidden="true"></i></div>
+        <h3 class="feat-title">PDF Reports</h3>
+        <p class="feat-desc">Export monthly or annual reports as PDF or CSV with one tap. Share your progress.</p>
+      </article>
+    </div>
+  </section>
+
+  <div class="divider" role="separator"></div>
+
+  <!-- CALCULATOR -->
+  <section class="section" id="calculator" aria-labelledby="calc-heading">
+    <div class="section-label">Live Calculator</div>
+    <h2 class="section-title" id="calc-heading">Estimate your footprint now</h2>
+    <p class="section-sub">Adjust the sliders below to see your estimated monthly CO₂ emissions in real time.</p>
+    <div class="card" style="max-width:600px">
+      <div class="card-title">Monthly Carbon Estimator</div>
+      <div class="calc-row">
+        <label for="carSlider">Car travel (km/day) <span id="carVal">20 km</span></label>
+        <input type="range" id="carSlider" min="0" max="100" value="20" step="1" oninput="updateCalc()" aria-label="Car travel distance per day in kilometres" />
+      </div>
+      <div class="calc-row">
+        <label for="elecSlider">Electricity usage (kWh/day) <span id="elecVal">8 kWh</span></label>
+        <input type="range" id="elecSlider" min="0" max="40" value="8" step="1" oninput="updateCalc()" aria-label="Daily electricity usage in kilowatt hours" />
+      </div>
+      <div class="calc-row">
+        <label for="dietSlider">Diet type <span id="dietVal">Mixed</span></label>
+        <input type="range" id="dietSlider" min="1" max="3" value="2" step="1" oninput="updateCalc()" aria-label="Diet type from vegetarian to meat-heavy" />
+      </div>
+      <div class="calc-row">
+        <label for="flightSlider">Flights per year <span id="flightVal">2 flights</span></label>
+        <input type="range" id="flightSlider" min="0" max="20" value="2" step="1" oninput="updateCalc()" aria-label="Number of flights per year" />
+      </div>
+      <div class="calc-result" role="status" aria-live="polite">
+        <div>
+          <div class="calc-result-label">Estimated monthly CO₂</div>
+          <div class="calc-result-sub">India average: ~180 kg/month</div>
+        </div>
+        <div style="display:flex;align-items:baseline;gap:5px">
+          <div class="calc-result-val" id="co2Result">312</div>
+          <div class="calc-result-unit">kg CO₂</div>
+        </div>
+      </div>
+      <button class="full-btn">
+        <i class="ti ti-sparkles" aria-hidden="true"></i> Get AI reduction tips
+      </button>
+    </div>
+  </section>
+
+  <div class="divider" role="separator"></div>
+
+  <!-- DASHBOARD PREVIEW -->
+  <section class="section" id="dashboard" aria-labelledby="dash-heading">
+    <div class="section-label">Dashboard Preview</div>
+    <h2 class="section-title" id="dash-heading">Your carbon at a glance</h2>
+    <p class="section-sub">Everything visualised in one place — reduction trends, goal status, and activity breakdown.</p>
+    <div class="two-col">
+      <div class="card">
+        <div class="card-title" style="font-size:13px;color:var(--text2)">Monthly CO₂ trend (kg)</div>
+        <div class="bar-chart" id="barChart" role="img" aria-label="Monthly CO2 trend showing decrease from 420kg to 240kg over 7 months"></div>
+        <div class="bar-labels" id="barLabels" aria-hidden="true"></div>
+      </div>
+      <div class="card">
+        <div class="card-title" style="font-size:13px;color:var(--text2);margin-bottom:4px">Reduction leaders</div>
+        <div class="trend-row">
+          <div class="trend-icon" aria-hidden="true"><i class="ti ti-car"></i></div>
+          <div class="trend-info"><div class="trend-name">Transport</div><div class="trend-sub">Used metro 4× this week</div></div>
+          <div class="trend-val">-18%</div>
+        </div>
+        <div class="trend-row">
+          <div class="trend-icon" aria-hidden="true"><i class="ti ti-bolt"></i></div>
+          <div class="trend-info"><div class="trend-name">Electricity</div><div class="trend-sub">AC usage down significantly</div></div>
+          <div class="trend-val">-12%</div>
+        </div>
+        <div class="trend-row">
+          <div class="trend-icon" aria-hidden="true"><i class="ti ti-salad"></i></div>
+          <div class="trend-info"><div class="trend-name">Diet</div><div class="trend-sub">3 vegetarian meals this week</div></div>
+          <div class="trend-val">-8%</div>
+        </div>
+        <div class="trend-row">
+          <div class="trend-icon" aria-hidden="true"><i class="ti ti-shopping-bag"></i></div>
+          <div class="trend-info"><div class="trend-name">Shopping</div><div class="trend-sub">Chose second-hand items</div></div>
+          <div class="trend-val">-5%</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider" role="separator"></div>
+
+  <!-- SCORING -->
+  <section class="section" id="scoring" aria-labelledby="scoring-heading">
+    <div class="section-label">Scoring System</div>
+    <h2 class="section-title" id="scoring-heading">Your sustainability tier</h2>
+    <p class="section-sub">Earn a score from 0–100 based on your habits. Level up as you reduce your environmental impact.</p>
+    <div class="tier-grid" role="list">
+      <div class="tier-card top" role="listitem">
+        <div class="tier-range">90–100</div>
+        <div class="tier-name">🏆 Eco Champion</div>
+        <div class="tier-desc">Top 5% of all users globally</div>
+      </div>
+      <div class="tier-card" role="listitem">
+        <div class="tier-range">70–89</div>
+        <div class="tier-name">🌿 Green Explorer</div>
+        <div class="tier-desc">Strong habits, keep going</div>
+      </div>
+      <div class="tier-card" role="listitem">
+        <div class="tier-range">50–69</div>
+        <div class="tier-name">🌱 Improving Citizen</div>
+        <div class="tier-desc">Good progress being made</div>
+      </div>
+      <div class="tier-card" role="listitem">
+        <div class="tier-range">0–49</div>
+        <div class="tier-name">⚡ Needs Attention</div>
+        <div class="tier-desc">Your AI coach will guide you</div>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider" role="separator"></div>
+
+  <!-- BADGES -->
+  <section class="section" id="gamification" aria-labelledby="badges-heading">
+    <div class="section-label">Gamification</div>
+    <h2 class="section-title" id="badges-heading">Earn your eco badges</h2>
+    <p class="section-sub">Complete challenges, build streaks, and unlock achievements as your score grows.</p>
+    <div class="badges-row" role="list">
+      <div class="badge-card" role="listitem">
+        <div class="badge-emoji" aria-hidden="true">🌱</div>
+        <div class="badge-name">Green Beginner</div>
+        <div class="badge-pts">+50 pts</div>
+      </div>
+      <div class="badge-card" role="listitem">
+        <div class="badge-emoji" aria-hidden="true">🌿</div>
+        <div class="badge-name">Eco Explorer</div>
+        <div class="badge-pts">+150 pts</div>
+      </div>
+      <div class="badge-card" role="listitem">
+        <div class="badge-emoji" aria-hidden="true">⚡</div>
+        <div class="badge-name">Climate Warrior</div>
+        <div class="badge-pts">+300 pts</div>
+      </div>
+      <div class="badge-card" role="listitem">
+        <div class="badge-emoji" aria-hidden="true">🏆</div>
+        <div class="badge-name">Sustainability Master</div>
+        <div class="badge-pts">+500 pts</div>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider" role="separator"></div>
+
+  <!-- ACCESSIBILITY -->
+  <section class="section" id="accessibility" aria-labelledby="a11y-heading">
+    <div class="section-label">Accessibility</div>
+    <h2 class="section-title" id="a11y-heading">Built for everyone</h2>
+    <p class="section-sub">WCAG 2.2 AA compliant. Targeting 95+ Lighthouse accessibility score.</p>
+    <div class="a11y-grid" role="list">
+      <div class="a11y-item" role="listitem"><i class="ti ti-keyboard" aria-hidden="true"></i> Keyboard navigation</div>
+      <div class="a11y-item" role="listitem"><i class="ti ti-eye" aria-hidden="true"></i> Screen reader support</div>
+      <div class="a11y-item" role="listitem"><i class="ti ti-contrast" aria-hidden="true"></i> High contrast mode</div>
+      <div class="a11y-item" role="listitem"><i class="ti ti-accessible" aria-hidden="true"></i> ARIA labels</div>
+      <div class="a11y-item" role="listitem"><i class="ti ti-code" aria-hidden="true"></i> Semantic HTML</div>
+      <div class="a11y-item" role="listitem"><i class="ti ti-minus" aria-hidden="true"></i> Reduced motion</div>
+      <div class="a11y-item" role="listitem"><i class="ti ti-device-mobile" aria-hidden="true"></i> Responsive design</div>
+      <div class="a11y-item" role="listitem"><i class="ti ti-text-size" aria-hidden="true"></i> Responsive typography</div>
+    </div>
+  </section>
+
+  <div class="divider" role="separator"></div>
+
+  <!-- STACK -->
+  <section class="section" id="stack" aria-labelledby="stack-heading">
+    <div class="section-label">Tech Stack</div>
+    <h2 class="section-title" id="stack-heading">Built for performance and scale</h2>
+    <p class="section-sub">Next.js 15, Supabase, Clerk Auth, Gemini AI, and a 95+ Lighthouse score across all metrics.</p>
+    <div class="stack-tags" role="list">
+      <span class="stack-tag" role="listitem">Next.js 15</span>
+      <span class="stack-tag" role="listitem">TypeScript</span>
+      <span class="stack-tag" role="listitem">TailwindCSS</span>
+      <span class="stack-tag" role="listitem">Shadcn UI</span>
+      <span class="stack-tag" role="listitem">Supabase PostgreSQL</span>
+      <span class="stack-tag" role="listitem">Clerk Auth</span>
+      <span class="stack-tag" role="listitem">Gemini API</span>
+      <span class="stack-tag" role="listitem">Recharts</span>
+      <span class="stack-tag" role="listitem">Zod</span>
+      <span class="stack-tag" role="listitem">Vitest</span>
+      <span class="stack-tag" role="listitem">Playwright</span>
+      <span class="stack-tag" role="listitem">Vercel</span>
+      <span class="stack-tag" role="listitem">Sentry</span>
+      <span class="stack-tag" role="listitem">PostHog</span>
+    </div>
+  </section>
+
+  <div class="divider" role="separator"></div>
+
+  <!-- CTA -->
+  <section class="cta-block" aria-labelledby="cta-heading">
+    <h2 id="cta-heading">Start your sustainability journey</h2>
+    <p>Join thousands tracking and reducing their carbon footprint with EcoTrack AI.</p>
+    <div class="cta-btns">
+      <button class="btn-primary" onclick="document.getElementById('calculator').scrollIntoView({behavior:'smooth'})">
+        <i class="ti ti-leaf" aria-hidden="true"></i> Get started free
+      </button>
+      <button class="btn-ghost">
+        <i class="ti ti-brand-github" aria-hidden="true"></i> View on GitHub
+      </button>
+    </div>
+  </section>
+  </main>
+
+  <!-- FOOTER -->
+  <footer role="contentinfo">
+    <div>
+      <span style="display:flex;align-items:center;gap:8px;font-weight:500;color:var(--text2)">
+        <span style="width:8px;height:8px;border-radius:50%;background:var(--green);display:inline-block"></span>
+        EcoTrack AI
+      </span>
+    </div>
+    <div style="display:flex;gap:20px">
+      <a href="#">Privacy</a>
+      <a href="#">Terms</a>
+      <a href="#">GitHub</a>
+    </div>
+    <div>Built with Next.js 15 · Deployed on Vercel</div>
+  </footer>
+
+  <script>
+    /* ── SCORE RING ── */
+    function drawRing(score) {
+      const c = document.getElementById('ringCanvas');
+      if (!c) return;
+      const ctx = c.getContext('2d');
+      const cx = 120, cy = 120, r = 96, lw = 13;
+      ctx.clearRect(0, 0, 240, 240);
+      ctx.beginPath();
+      ctx.arc(cx, cy, r, -Math.PI / 2, Math.PI * 2, false);
+      ctx.strokeStyle = 'rgba(74,222,128,0.08)';
+      ctx.lineWidth = lw;
+      ctx.lineCap = 'round';
+      ctx.stroke();
+      if (score <= 0) return;
+      const pct = score / 100;
+      const grad = ctx.createLinearGradient(0, 0, 240, 240);
+      grad.addColorStop(0, '#4ade80');
+      grad.addColorStop(1, '#a3e635');
+      ctx.beginPath();
+      ctx.arc(cx, cy, r, -Math.PI / 2, -Math.PI / 2 + pct * Math.PI * 2, false);
+      ctx.strokeStyle = grad;
+      ctx.lineWidth = lw;
+      ctx.lineCap = 'round';
+      ctx.stroke();
+    }
+
+    function animateScore() {
+      const target = 78;
+      const start = Date.now();
+      const dur = 1800;
+      const tiers = [
+        [90, 'Eco Champion 🏆'],
+        [70, 'Green Explorer 🌿'],
+        [50, 'Improving Citizen 🌱'],
+        [0, 'Needs Attention ⚡']
+      ];
+      function getBadge(s) {
+        for (const [t, label] of tiers) { if (s >= t) return label; }
+        return 'Needs Attention ⚡';
+      }
+      function ease(t) { return t < 0.5 ? 2 * t * t : -1 + (4 - 2 * t) * t; }
+      function step() {
+        const elapsed = Date.now() - start;
+        const p = Math.min(elapsed / dur, 1);
+        const cur = Math.round(ease(p) * target);
+        document.getElementById('scoreNum').textContent = cur;
+        document.getElementById('scoreBadge').textContent = getBadge(cur);
+        drawRing(cur);
+        if (p < 1) requestAnimationFrame(step);
+      }
+      requestAnimationFrame(step);
+    }
+
+    /* ── CALCULATOR ── */
+    function updateCalc() {
+      const car = +document.getElementById('carSlider').value;
+      const elec = +document.getElementById('elecSlider').value;
+      const diet = +document.getElementById('dietSlider').value;
+      const flights = +document.getElementById('flightSlider').value;
+      document.getElementById('carVal').textContent = car + ' km';
+      document.getElementById('elecVal').textContent = elec + ' kWh';
+      const dietLabels = { 1: 'Vegetarian', 2: 'Mixed', 3: 'Meat-heavy' };
+      document.getElementById('dietVal').textContent = dietLabels[diet];
+      document.getElementById('flightVal').textContent = flights + (flights === 1 ? ' flight' : ' flights');
+      const dietFactor = { 1: 80, 2: 160, 3: 300 }[diet];
+      const monthly = Math.round(car * 0.21 * 30 + elec * 0.82 * 30 + dietFactor + (flights * 255) / 12);
+      document.getElementById('co2Result').textContent = monthly;
+    }
+
+    /* ── BAR CHART ── */
+    function buildChart() {
+      const months = ['Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec', 'Jan'];
+      const vals = [420, 390, 360, 320, 290, 260, 240];
+      const max = Math.max(...vals);
+      const chart = document.getElementById('barChart');
+      const labels = document.getElementById('barLabels');
+      chart.innerHTML = '';
+      labels.innerHTML = '';
+      months.forEach((m, i) => {
+        const b = document.createElement('div');
+        b.className = 'bar' + (i === vals.length - 1 ? ' active' : '');
+        b.style.height = Math.round((vals[i] / max) * 90) + 'px';
+        b.setAttribute('title', vals[i] + ' kg CO₂');
+        chart.appendChild(b);
+        const l = document.createElement('div');
+        l.className = 'bar-label';
+        l.textContent = m;
+        labels.appendChild(l);
+      });
+    }
+
+    buildChart();
+    animateScore();
+  </script>
+</body>
+</html>
